@@ -8,12 +8,16 @@ start:
   # pro: true
 
 branding:
-  title: Community guides for SillyTavern
+  title: Resources for SillyTavern
   label: Resources
 
 links:
-  #- text: Official SillyTavern resources
-  #  link: https://sillytavern.app/
+  - text: SillyTavern Reddit (community)
+    link: https://www.reddit.com/r/SillyTavernAI/
+  - text: SillyTavern Documentation (official)
+    link: https://docs.sillytavern.app/
+  - text: SillyTavern (official)
+    link: https://sillytavern.app/
 
 footer:
-  copyright: "&copy; {{ year }}. This site and its contents are subject to the terms of the [GNU AGPL version 3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)"
+  copyright: "&copy; {{ year }}. Except where otherwise mentioned, this site and its content are subject to the terms of the [GNU AGPL version 3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)"
