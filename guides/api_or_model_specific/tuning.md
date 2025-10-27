@@ -53,17 +53,17 @@ Top P works in tandem with Temperature, reducing the set of candidate tokens tha
 
 While the default vlaue of `1.0` (which does _not_ mean "consider everything") is reasonable for most models, if your chat sometimes ends up changing languages or going in a very strange direction, it could be because the LLM considered that "猫" is a possible option for "cat" in your story, even though it was scored quite low, but a roll of the dice made it the next token, and then something else outside of English was much more likely to follow. In case this is happening to you, try lowering it in steps of `0.025`
 
+## Min P
+
+Min P acts as a filter on which tokens can enter consideration for Top P and Typical P by stating the lowest probability that a token must have to be allowed into the set. If a token only has a 1% chance of being a viable successor and Min P is set to `0.05`, it will just be discarded immediately.
+
 ## Typical P `[Text Completion]`
 
 Typical P works with Top P to help filter the list of candiate successor-tokens prior to scoring. The default value of `1.0` does not cause anything to be prematurely discarded, while lower values reduce variance relative to an "average" point, discarding the highest-probability and lowest-probability options, which may increase the stability of production in exchange for making it more bland, but also less predictable for common phrases in the target language.
 
 It should probably not be changed from `1.0` for storytelling purposes; slightly lower values may make sense for exploring ideas in an assistant capacity.
 
-## Min P `[Text Completion]`
-
-Min P acts as a filter on which tokens can enter consideration for Top P and Typical P by stating the lowest probability that a token must have to be allowed into the set. If a token only has a 1% chance of being a viable successor and Min P is set to `0.05`, it will just be discarded immediately.
-
-## Top K `[Text Completion]`
+## Top K
 
 Top K is sort of an alternative to Top P: where Top P filters the pool of candidates based on cumulative probability, Top K filters the pool by considering the `k` top-ranked options, providing a fixed number of choices.
 
