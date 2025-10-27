@@ -33,7 +33,7 @@ Higher temperatures cause the model to produce tokens that may be less-related t
 
 Most models are trained with a value of `1.0` being suitable for general use. Programming and business use-cases generally prefer low temperatures, while creative writing and roleplaying often benefit from higher values.
 
-When adjusting temperature, starting with adjustments of `0.1` is recommended. Dialing things in at `0.01` granularity does make a difference, since that's still modifying probabilities by a full percentage point.
+When adjusting temperature, starting with increments of `0.1` is recommended. Dialing things in at `0.01` granularity does make a difference, since that's still modifying probabilities by a full percentage point.
 
 Fine-tuned models, those specifically trained for roleplaying purposes, generally have their own recommended ranges, which may be below `1.0` depending on how well they should adhere to their training.
 
