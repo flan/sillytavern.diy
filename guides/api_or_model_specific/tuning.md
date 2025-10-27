@@ -73,7 +73,7 @@ Top A is sort of an alternative to Min P where the least-likely candidate tokens
 
 ## Context Size
 
-Context Size is maximum number of tokens that may be sent to the LLM. SillyTavern employes some strategies to format your chat, including custom prompts and card information, to fit within this window. Notably, it always includes essential fields like the system prompt and the message you just entered, and conditionally includes information like lorebook entries, optional prompts, and as many chat-history entries as it can manage to hit this target.
+Context Size is maximum number of tokens that may be sent to the LLM. SillyTavern employs some strategies to format your chat, including custom prompts and card information, to fit within this window. Notably, it always includes essential fields like the system prompt and the message you just entered, and conditionally includes information like lorebook entries, optional prompts, and as many chat-history entries as it can manage to hit this target.
 
 A *very* common beginner mistake is to set your context as high as possible. When it comes to maintaining an LLM's focus on subject-matter, less is usually better. As this number grows, not only will you be spending more time or money on input-token processing cost, but you are also asking the LLM to search through many more pages of often-meaningless flavour text, like "he said", conjunctions, and *so many* "the"s. Having some of this is good for maintaining a consistent writing style, but having too many will cause your important plot-points to become lost in the sea of data, and it's all just text to an LLM.
 
