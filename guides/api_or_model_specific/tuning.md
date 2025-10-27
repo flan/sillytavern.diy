@@ -85,7 +85,7 @@ Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other 
 
 ## Max Response Length
 
-Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value of between `500` and `1000` for most longer-format narrative stories. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
+Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value of between `500` and `1000` for most longer-format narrative stories. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
 
 ## Multiple swipes per generation
 
