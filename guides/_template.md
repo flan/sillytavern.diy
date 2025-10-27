@@ -28,9 +28,9 @@ route: /guides/<category>/guide-name-slug
 
 # <Guide Title>
 
-- Last-tested SillyTavern version: 1.2.3
+- Last-tested SillyTavern version: 1.2.3|N/A
 - Last updated: Jan 1, 1970
-- Applicable platforms: Windows|macOS|Linux|Android|iOS
+- Applicable platforms: Windows|macOS|Linux|Android|iOS|N/A
 - External resources required: yes|no
 - Technical skill required: none|filesystem management|configuration editing|network management|systems administration|programming
 - Safety: perfectly safe|make a backup|ask a friend|your SillyTavern installation could be ruined|your OS could need to be reinstalled
@@ -47,7 +47,7 @@ If desired, author details may be placed in the footer of a guide, using the fol
 ## Credits
 
 - Scary Sandwich-face
-  - Discord: @scarysammich
+  - Discord: @scarysammich#1234
   - Website: http://example.org/
 ```
 

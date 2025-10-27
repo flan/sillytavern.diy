@@ -2,6 +2,7 @@
 order: 999999
 expanded: true
 route: /ai-safety
+icon: icon-ai-model
 ---
 
 # AI Safety Guidelines
@@ -14,9 +15,9 @@ AI systems, which include Large Language Models (LLMs) are designed to generate 
 
 LLMs have been trained on an unfathomable number of samples of writing, covering an enormous range of topics, from benign and informational to dark and horrific. They have been tuned to present mastery of language and can quickly write compelling, convincing responses with any mix of what they have learned.
 
-While this can be highly entertaining and often useful, when the AI does not know, or cannot access, a specific detail, its design is to produce *something*, which means that it will invent false information and continue writing from there as though it were true. This means that it is impossible to accept anything presented at face-value, as though you are dealing with a pathological liar who only wants to earn your trust.
+While this can be highly entertaining and often useful, when the AI does not know, or cannot access, a specific detail, its design is to produce *something*, which means that it will invent false information and continue writing from there as though it were true. This means that it is impossible to accept anything presented at face-value, as though you are dealing with a pathological liar who only wants to gain your trust.
 
-For roleplaying applications, this can be great: exaggerations and surprise twists make for fun stories. For life advice or answers to important questions, this is *extremely bad* because the machine will do its best to try to make you believe something that is not true.
+For roleplaying applications, this can be great: exaggerations and surprise twists make for fun stories. For life advice or answers to important questions, this is *extremely bad* because the machine will do its best to try to make you believe things that are not true.
 
 ## AIs are not suitable for use as therapists, counselors, or advisors of any kind
 
@@ -38,7 +39,7 @@ If you wouldn't tell a stranger about your health problems, finances, or hobbies
 
 For ERP users (you know who you are; the providers you use know, too), no, nobody is reading about your fetishes. A machine is processing them (that's what an LLM does), but unless you're doing something that repeatedly triggers ethical violation warnings (because false-positives happen), you're just one of millions of people doing the same thing. You might still get marketed to based on them, though; whether that's a positive to you or not is a personal thing.
 
-## AI addition is real
+## AI addiction is real
 
 LLMs have their roots as entertaining curiosities and the companies producing them have a wealth of research into human psychology to understand what does and does not drive engagement. Because engagement means revenue and corporations like money, they have an incentive to tune them to be as compelling as possible, encoruging a constant "just one more" effect.
 
