@@ -77,9 +77,9 @@ Context Size is maximum number of tokens that may be sent to the LLM. SillyTaver
 
 A *very* common beginner mistake is to set your context as high as possible. When it comes to maintaining an LLM's focus on subject-matter, less is usually better. As this number grows, not only will you be spending more time or money on input-token processing cost, but you are also asking the LLM to search through many more pages of often-meaningless flavour text, like "he said", conjunctions, and *so many* "the"s. Having some of this is good for maintaining a consistent writing style, but having too many will cause your important plot-points to become lost in the sea of data, and it's all just text to an LLM.
 
-As of late 2025, it is strongly recommended that you start with a context-size of 16k (`16384`) and scale it up (or sometimes down) in steps of 2k (`2048`) up to a maximum of 32k (`32768`). Smaller models usually maintain better focus with smaller contexts, while larger models can sometimes find something useful in a large window, but your overall quality will go up with numbers like these.
+As of late 2025, it is strongly recommended that you start with a context-size of 16k (`16384`) and scale it up (or sometimes down) in steps of 2k (`2048`) up to a maximum of 32k (`32768`). Smaller models usually maintain better focus with smaller contexts, while larger models can sometimes find something useful in a large window, but your overall experience will be better with numbers like these.
 
-While there is a case for large contexts, such as searching a knowledgebase or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creating story does not.
+While there is a case for large contexts, such as searching a knowledgebase or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creative story does not.
 
 Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other popular World Info extensions, help to keep your story on track, and help them out with custom lorebooks or Author's Note entries.
 
