@@ -11,7 +11,7 @@ route: /guides/api_or_model_specific/tuning
 - External resources required: no
 - Technical skill required: none
 - Safety: perfectly safe
-- Expected time-commitment for a novice: 5 minutes
+- Expected time-commitment for a novice: 10 minutes
 
 This is a brief overview of how parameters and sampling values work with LLMs for some common use-cases.
 
