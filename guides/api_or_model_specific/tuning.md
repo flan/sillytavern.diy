@@ -106,7 +106,7 @@ Chat History | As much as fits in remaining Prompt Size
 User-submitted message | Reproduced exactly as written
 Buffer for response | Max Response Length
 
-This means that setting an enormous Max Response Length will eat into the Context Size available for World Info and Chat History, since it is subtracted before those resource calculations are performed.
+This means that setting an enormous Max Response Length will eat into the Prompt Size available for World Info and Chat History, since it is subtracted before those resource calculations are performed.
 
 ## Multiple swipes per generation
 
