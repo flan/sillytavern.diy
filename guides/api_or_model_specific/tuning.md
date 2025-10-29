@@ -95,12 +95,14 @@ LLMs work by receiving context as input, in the form of a series of tokens, then
 
 SillyTavern uses the following general approach to partition the Context Size:
 
+*Prompt Size = Context Size - Max Response Length*
+
 Content | Limit
 --- | ---
 System Prompt and other similar data | Reproduced exactly as written
-World Info | Whatever is set to be triggered (up to a default limit of 25% of Context Size, highest-priority first)
+World Info | Whatever is set to be triggered (up to a default limit of 25% of Prompt Size, highest-priority first)
 Persona and Character info | Reproduced exactly as written
-Chat History | As much as fits in remaining Context Size
+Chat History | As much as fits in remaining Prompt Size
 User-submitted message | Reproduced exactly as written
 Buffer for response | Max Response Length
 
