@@ -23,6 +23,51 @@ This guide focuses on the parameters most likely to cause problems for newer use
 
 A note on numbers: many programmers use values of `0.0` to refer to 0% and `1.0` to refer to 100% because it makes math easier and more efficient. When you see `1.0`, it is actually a very big value, not the immediate successor to `0`.
 
+## Context Size
+
+Context Size is maximum number of tokens that may be sent to the LLM. SillyTavern employs some strategies to format your chat, including custom prompts and card information, to fit within this window. Notably, it always includes essential fields like the system prompt and the message you just entered, and conditionally includes information like lorebook entries, optional prompts, and as many chat-history entries as it can manage to hit this target.
+
+A *very* common beginner mistake is to set your context as high as possible. When it comes to maintaining an LLM's focus on subject-matter, less is usually better. As this number grows, not only will you be spending more time or money on input-token processing cost, but you are also asking the LLM to search through many more pages of often-meaningless flavour text, like "he said", conjunctions, and *so many* "the"s. Having some of this is good for maintaining a consistent writing style, but having too many will cause your important plot-points to become lost in the sea of data, and it's all just text to an LLM.
+
+As of late 2025, it is strongly recommended that you start with a context-size of 16k (`16384`) and scale it up (or sometimes down) in steps of 2k (`2048`) up to a maximum of 32k (`32768`). Smaller models usually maintain better focus with smaller contexts, while larger models can sometimes find something useful in a large window, but your overall experience will be better with numbers like these.
+
+While there is a case for large contexts, such as searching a knowledgebase or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creative story does not.
+
+Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other popular World Info extensions, help to keep your story on track, and help them out with custom lorebooks or Author's Note entries.
+
+## Max Response Length
+
+Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value around `300` for more chat-like interactions, `500` for longer-format narrative stories, and `1000` or more for assistant uses. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
+
+## Prompt Size `[implicit]`
+
+Prompt Size is not a configurable field, but it is a potential cause of confusion.
+
+LLMs work by receiving context as input, in the form of a series of tokens, then filling out the rest of the context with tokens that should follow, the "intelligent auto-complete" nature of their operation.
+
+SillyTavern uses the following general approach to partition the Context Size:
+
+*Prompt Size = Context Size - Max Response Length*
+
+Content | Limit
+--- | ---
+System Prompt and other similar data | Reproduced exactly as written
+World Info | Whatever is set to be triggered (up to a default limit of 25% of Prompt Size, highest-priority first)
+Persona and Character info | Reproduced exactly as written
+Chat History | As much as fits in remaining Prompt Size
+User-submitted message | Reproduced exactly as written
+Buffer for response | Max Response Length
+
+This means that setting an enormous Max Response Length will eat into the Prompt Size available for World Info and Chat History, since it is subtracted before those resource calculations are performed.
+
+## Multiple swipes per generation
+
+This causes the LLM to produce multiple candidate responses every time you submit a message, to speed up the swiping process.
+
+It defaults to `1`. This is good. Leave it there until you're absolutely sure you know how your model behaves and whether you actually are a swiper.
+
+Setting it to higher numbers and not using it just wastes money, and many APIs have an upper limit (often `1`), with an error-response being produced if the request from SillyTavern exceeds this target.
+
 ## Temperature
 
 Temperature is a modifier on how much randomness, or how exaggerated, the output of an LLM should be.
@@ -70,48 +115,3 @@ Top K is sort of an alternative to Top P: where Top P filters the pool of candid
 ## Top A `[Text Completion]`
 
 Top A is sort of an alternative to Min P where the least-likely candidate tokens are dropped from the pool based on how far away they are from the most-likely candidate.
-
-## Context Size
-
-Context Size is maximum number of tokens that may be sent to the LLM. SillyTavern employs some strategies to format your chat, including custom prompts and card information, to fit within this window. Notably, it always includes essential fields like the system prompt and the message you just entered, and conditionally includes information like lorebook entries, optional prompts, and as many chat-history entries as it can manage to hit this target.
-
-A *very* common beginner mistake is to set your context as high as possible. When it comes to maintaining an LLM's focus on subject-matter, less is usually better. As this number grows, not only will you be spending more time or money on input-token processing cost, but you are also asking the LLM to search through many more pages of often-meaningless flavour text, like "he said", conjunctions, and *so many* "the"s. Having some of this is good for maintaining a consistent writing style, but having too many will cause your important plot-points to become lost in the sea of data, and it's all just text to an LLM.
-
-As of late 2025, it is strongly recommended that you start with a context-size of 16k (`16384`) and scale it up (or sometimes down) in steps of 2k (`2048`) up to a maximum of 32k (`32768`). Smaller models usually maintain better focus with smaller contexts, while larger models can sometimes find something useful in a large window, but your overall experience will be better with numbers like these.
-
-While there is a case for large contexts, such as searching a knowledgebase or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creative story does not.
-
-Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other popular World Info extensions, help to keep your story on track, and help them out with custom lorebooks or Author's Note entries.
-
-## Max Response Length
-
-Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value around `300` for more chat-like interactions, `500` for longer-format narrative stories, and `1000` or more for assistant uses. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
-
-## Prompt Size `[implicit]`
-
-Prompt Size is not a configurable field, but it is a potential cause of confusion.
-
-LLMs work by receiving context as input, in the form of a series of tokens, then filling out the rest of the context with tokens that should follow, the "intelligent auto-complete" nature of their operation.
-
-SillyTavern uses the following general approach to partition the Context Size:
-
-*Prompt Size = Context Size - Max Response Length*
-
-Content | Limit
---- | ---
-System Prompt and other similar data | Reproduced exactly as written
-World Info | Whatever is set to be triggered (up to a default limit of 25% of Prompt Size, highest-priority first)
-Persona and Character info | Reproduced exactly as written
-Chat History | As much as fits in remaining Prompt Size
-User-submitted message | Reproduced exactly as written
-Buffer for response | Max Response Length
-
-This means that setting an enormous Max Response Length will eat into the Prompt Size available for World Info and Chat History, since it is subtracted before those resource calculations are performed.
-
-## Multiple swipes per generation
-
-This causes the LLM to produce multiple candidate responses every time you submit a message, to speed up the swiping process.
-
-It defaults to `1`. This is good. Leave it there until you're absolutely sure you know how your model behaves and whether you actually are a swiper.
-
-Setting it to higher numbers and not using it just wastes money, and many APIs have an upper limit (often `1`), with an error-response being produced if the request from SillyTavern exceeds this target.
