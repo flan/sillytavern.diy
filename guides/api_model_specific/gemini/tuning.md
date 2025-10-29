@@ -1,5 +1,5 @@
 ---
-route: /guides/api_or_model_specific/glm/tuning
+route: /guides/api_model_specific/gemini/tuning
 ---
 
 # Parameter tuning
@@ -12,13 +12,13 @@ route: /guides/api_or_model_specific/glm/tuning
 - Safety: perfectly safe
 - Expected time-commitment for a novice: 5 minutes
 
-This is a collection of recommended starting-point values for working with [Z.ai's GLM family](https://z.ai/model-api) of LLMs.
+This is a collection of recommended starting-point values for working with [Google's Gemini family](https://ai.google.dev/gemini-api/) of LLMs.
 
 This guide is neither affiliated with, nor an endorsement of, any products or services.
 
 We have a [general explanation of parameters](../tuning), which should be consulted if you are new.
 
-## GLM-4.5V
+## 2.5 Pro
 
 *Details unavailable. Please contribute.*
 
@@ -29,7 +29,7 @@ Frequency Penalty | `0.0`
 Presence Penalty | `0.0`
 Top P | `0.0`
 
-## GLM-4.5-Flash
+## 2.5 Flash
 
 *Details unavailable. Please contribute.*
 
@@ -40,18 +40,7 @@ Frequency Penalty | `0.0`
 Presence Penalty | `0.0`
 Top P | `0.0`
 
-## GLM-4.5-Air
-
-*Details unavailable. Please contribute.*
-
-Key | Value
---- | ---
-Temperature | `0.0`
-Frequency Penalty | `0.0`
-Presence Penalty | `0.0`
-Top P | `0.0`
-
-## GLM-4.6
+## 2.5 Flash-Lite
 
 *Details unavailable. Please contribute.*
 

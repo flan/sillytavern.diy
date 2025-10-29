@@ -1,5 +1,5 @@
 ---
-route: /guides/api_or_model_specific/claude/tuning
+route: /guides/api_model_specific/claude/tuning
 ---
 
 # Parameter tuning

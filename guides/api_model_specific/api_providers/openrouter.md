@@ -1,5 +1,5 @@
 ---
-route: /guides/api_or_model_specific/api_providers/openrouter
+route: /guides/api_model_specific/api_providers/openrouter
 ---
 
 # OpenRouter

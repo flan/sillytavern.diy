@@ -1,5 +1,5 @@
 ---
-route: /guides/api_or_model_specific/gemini/tuning
+route: /guides/api_model_specific/deepseek/tuning
 ---
 
 # Parameter tuning
@@ -12,26 +12,17 @@ route: /guides/api_or_model_specific/gemini/tuning
 - Safety: perfectly safe
 - Expected time-commitment for a novice: 5 minutes
 
-This is a collection of recommended starting-point values for working with [Google's Gemini family](https://ai.google.dev/gemini-api/) of LLMs.
+This is a collection of recommended starting-point values for working with [the DeepSeek family](https://api-docs.deepseek.com/) of LLMs.
 
 This guide is neither affiliated with, nor an endorsement of, any products or services.
 
 We have a [general explanation of parameters](../tuning), which should be consulted if you are new.
 
-## 2.5 Pro
+## DeepSeek-V3.2-Exp (Non-thinking Mode)
 
-*Details unavailable. Please contribute.*
+*Details incomplete. Please contribute.*
 
-Key | Value
---- | ---
-Temperature | `0.0`
-Frequency Penalty | `0.0`
-Presence Penalty | `0.0`
-Top P | `0.0`
-
-## 2.5 Flash
-
-*Details unavailable. Please contribute.*
+Partial vendor documentation is available at https://api-docs.deepseek.com/quick_start/parameter_settings
 
 Key | Value
 --- | ---
@@ -40,9 +31,11 @@ Frequency Penalty | `0.0`
 Presence Penalty | `0.0`
 Top P | `0.0`
 
-## 2.5 Flash-Lite
+## DeepSeek-V3.2-Exp (Thinking Mode)
 
-*Details unavailable. Please contribute.*
+*Details incomplete. Please contribute.*
+
+Partial vendor documentation is available at https://api-docs.deepseek.com/quick_start/parameter_settings
 
 Key | Value
 --- | ---

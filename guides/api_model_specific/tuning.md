@@ -1,6 +1,6 @@
 ---
 order: 10000
-route: /guides/api_or_model_specific/tuning
+route: /guides/api_model_specific/tuning
 ---
 
 # Parameter tuning
