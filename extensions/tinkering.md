@@ -16,7 +16,9 @@ Tinkering extensions have no real focus, instead exposing system internals and a
 - [Character Creator (CREC)](https://github.com/bmen25124/SillyTavern-Character-Creator)
   - Attempts to generate character cards based on events in chat history
   - Discord: https://discord.com/channels/1100685673633153084/1355543982201114746
+- [LALib](https://github.com/LenAnderson/SillyTavern-LALib)
+  - Extends the STScript interface with a library of additional commands
+  - Discord: https://discord.com/channels/1100685673633153084/1199374943624904714
 - [Model Injection](https://github.com/aikohanasaki/SillyTavern-ModelInjection)
   - Makes the LLM model-ID accessible for use in scripting
   - Discord: https://discord.com/channels/1100685673633153084/1430637350706352178
-  
