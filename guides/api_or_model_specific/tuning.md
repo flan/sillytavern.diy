@@ -85,7 +85,26 @@ Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other 
 
 ## Max Response Length
 
-Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value of between `500` and `1000` for most longer-format narrative stories. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
+Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value of between `500` and `1000` for most longer-format narrative stories. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted. There is no real penalty to setting this too high, except that it may allow a misbehaving LLM to ramble for a very long time before being interrupted.
+
+## Prompt Size `[implicit]`
+
+Prompt Size is not a configurable field, but it is a potential cause of confusion.
+
+LLMs work by receiving context as input, in the form of a series of tokens, then filling out the rest of the context with tokens that should follow, the "intelligent auto-complete" nature of their operation.
+
+SillyTavern uses the following general approach to partition the Context Size:
+
+Content | Limit
+--- | ---
+System Prompt and other similar data | Reproduced exactly as written
+World Info | Whatever is set to be triggered (up to a default limit of 25% of Context Size, highest-priority first)
+Persona and Character info | Reproduced exactly as written
+Chat History | As much as fits in remaining Context Size
+User-submitted message | Reproduced exactly as written
+Buffer for response | Max Response Length
+
+This means that setting an enormous Max Response Length will eat into the Context Size available for World Info and Chat History, since it is subtracted before those resource calculations are performed.
 
 ## Multiple swipes per generation
 
