@@ -12,7 +12,8 @@ Tinkering extensions have no real focus, instead exposing system internals and a
 - [Alternate Fields](https://github.com/nbrown725/SillyTavern-AlternateDescriptions)
   - Adds support for quick-swap values in character-card fields, allowing you to quickly experiment with prompt revisions
     - Avoids the need to use multiple copies of a card to try out different ideas
-  - This extension will create non-standard cards; they should remain compatible with other systems, but sanitise them before sharing
+    - This extension will create non-standard cards; they should remain compatible with other systems, but sanitise them before sharing
+  - Discord: https://discord.com/channels/1100685673633153084/1381458901735837838
 - [Character Creator (CREC)](https://github.com/bmen25124/SillyTavern-Character-Creator)
   - Attempts to generate character cards based on events in chat history
   - Discord: https://discord.com/channels/1100685673633153084/1355543982201114746
