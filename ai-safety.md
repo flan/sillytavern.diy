@@ -2,7 +2,7 @@
 order: 999999
 expanded: true
 route: /ai-safety
-icon: icon-ai-model
+icon: ai-model
 ---
 
 # AI Safety Guidelines
