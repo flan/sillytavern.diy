@@ -43,7 +43,7 @@ A typical token is around three or four Latin characters, as in our example; non
 
 Now, you may think there are only four tokens in our example; it's a string made up of four words, after all, but there are actually seven: the spaces, ` `, need to be encoded, too, which makes this string a sequence like [`the`, ` `, `cat`, ` `, `is`, ` `, `cute`]. There are ways to compress this, but we'll keep things simple.
 
-When the LLM is given the text "the cat is cute", it chunks it into tokens, which it internally maps into a series of numbers, so this sentence might be represented as [10, 2, 311, 2, 14, 2, 8921]. These numbers are the real tokens, an efficient mapping from a textual form to something that the model's parameters can quickly process.
+When the LLM is given the text "the cat is cute", it chunks it into tokens, which it internally maps into a series of numbers, so this sentence might be represented as [10, 2, 311, 2, 14, 2, 8921]. These numbers are the real tokens, an efficient mapping from a textual form to something that the model's interfaces can quickly process.
 
 Now consider a longer word like "spectacular". This would likely be tokenised as [`spec`, `tac`, `ular`] depending on the model's training data and methodology. In general, common prefixes, suffixes, and stems are partitioned so a single token-integer can be mapped as broadly as possible for efficiency. You don't *really* need to know this part, but it helps to understand why text streams the way it does and why vectorisation for World Info can sometimes be wonky, especially with triggers that don't have enough context to distance themselves from, or closely associate with, the parts of chat that you think might be applicable.
 
