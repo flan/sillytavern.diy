@@ -3,7 +3,7 @@ order: 9999
 route: /guides/api_model_specific/model_whatsits
 ---
 
-# Token? Parameter? Quant? What?
+# Token? Parameter? Quant?
 
 - Last-tested SillyTavern version: N/A
 - Last updated: Oct 29, 2025
@@ -75,7 +75,7 @@ Each parameter is typically one of a few varieties:
 - Biases, which contribute to traversal of nodes for the current input-token, refined as layers are traversed
 - Activations, which consider the current token, its biases, and the weight, to decide which node will be reached next
 
-Though primitive, the concept of a [Markov chain](https://en.wikipedia.org/wiki/Markov_chain) is very important to probability research and it may help to illustrate the basic concept of what is involved if this piques your interest.
+Though primitive, the [Markov chain](https://en.wikipedia.org/wiki/Markov_chain) is very important to probability research and it may help to illustrate the basic concept of what is involved if this piques your interest.
 
 A 70-billion parameter model will have 70,000,000,000 nodes like these, with some subset of each being used to determine what token comes next in the output-stream appearing on your screen. In a naive search, all 70-billion parameters must also be considered each time, which is why the concept of memory-bandwidth is so important to LLM inferencing.
 
