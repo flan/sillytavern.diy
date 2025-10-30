@@ -137,7 +137,7 @@ As each output-token is evaluated, the context being processed must be available
 
 This is a strategy for partitioning a dense model into a collection of much smaller models, each trained to be specialised in a specific aspect of the source corpus.
 
-The name is, as of 2025, still aspirational: the "experts" aren't really subject-matter experts the way a human might think of the term, as like having specialisation in physics, chemistry, or biology, but rather in parts of the token-production chain: punctuation, sentence clauses, conjunction, location, numbers. A routing component sits in front, determining which "experts" to engage for the next production step (which may be be as few as one or a complex sequence involving repeated invocation of the same sub-model).
+The name is, as of 2025, still aspirational: the "experts" aren't really subject-matter experts the way a human might think of the term, as like having specialisation in physics, chemistry, or biology, but rather in parts of the token-production chain: punctuation, sentence clauses, conjunction, location, numbers. A routing component sits in front, determining which "experts" to engage for the next production step (which may be as few as one or a complex sequence involving repeated invocation of the same sub-model).
 
 The MoE flow works similarly to layers, passing the context through each, with the most significant difference being that, because only a subset of the whole model is required to generate each token, the process can run several times faster than with a linear dense model.
 
