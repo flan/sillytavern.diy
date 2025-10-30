@@ -87,7 +87,7 @@ Have you ever heard an old MP3 file and wondered why cymbals sound like distorte
 
 Quantisation is similar to that: it is a form of lossy compression, where some precision is lost, but you can still recognise and mostly appreciate the thing you're listening to. You're not going to mistake the number `6` for a `5` or `7`, but it's no longer `6.251614789`, and that makes you as sad as it makes me.
 
-For simplicity, we're going to ignore floating-point numbers (though `fp8` and `fp4` are starting to emerge), since the basic concept is the same, though the math itself differs. (If you care about the distinction, you already know enough to skip this part)
+For simplicity, we're going to ignore floating-point numbers since the basic concept is the same, though the math itself differs. (If you care about the distinction, you already know enough to skip this part)
 
 At full sixteen-bit resolution, which is how most models are published, each parameter occupies two bytes of data, encoding up to 65,536 possible values, which allows for a lot of precision in choosing which node to reach next as the activation-chain passes through the parameter-tree. Arguably, way more than is typically ever needed.
 
