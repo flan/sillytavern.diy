@@ -111,7 +111,7 @@ You might be aware of things like your GPU's ability to work with matrices in `i
 
 These are encoding formats for models. If you are not self-hosting, that's all you really need to know.
 
-SafeTensors can be thought of as uncompressed data, like a `.wav` file that you might get from ripping a CD: full precision, no imposed compression and very big. These typically come in sixteen-bit floating-point precision, which means that, roughly speaking, each parameter takes two butes of data to encode. Most GPUs from the past decade do well with this format, but it consumes a ton of memory. Very few people actually run them outside of specialised hosting providers.
+SafeTensors can be thought of as uncompressed data, like a `.wav` file that you might get from ripping a CD: full precision, no imposed compression, and very big. These typically come in sixteen-bit floating-point precision, which means that, roughly speaking, each parameter takes two butes of data to encode. Most GPUs from the past decade do well with this format, but it consumes a ton of memory. Very few people actually run them outside of specialised hosting providers.
 
 GGUF, the GPT-Generated Unified Format, is the successor to GPT-Generated Markup Language, both more-compact, specialised ways of repacking SafeTensor data. GGUF is notable and extremely popular because it provides standardisation for the practice of quantisation.
 
