@@ -85,7 +85,7 @@ A 70-billion parameter model will not have a bigger vocabulary than a 7-billion 
 
 Have you ever heard an old MP3 file and wondered why cymbals sound like distorted waterfalls? Or watched a low-bitrate movie a friend obtained through less-than-legal means? If so, great, you've experienced lossy compression. If not, uh, just try to think of how if you round a number up or down, you throw away the decimal part in exchange for "good enough" simplicity.
 
-Quantisation is similar to that: it is a form of lossy compression, where some precision is lost, but you can still recognise and mostly appreciate the thing you're listening to. You're not going to mistake the number `6` for a `5` or `7`, but it's no longer `6.251614789`, and that makes you as sad as it makes me.
+Quantisation is similar to that: it is a form of lossy compression, where some precision is lost, but you can still recognise and mostly appreciate the thing you're observing. You're not going to mistake the number `6` for a `5` or `7`, but it's no longer `6.251614789`, and that makes you as sad as it makes me.
 
 For simplicity, we're going to ignore floating-point numbers since the basic concept is the same, though the math itself differs. (If you care about the distinction, you already know enough to skip this part)
 
