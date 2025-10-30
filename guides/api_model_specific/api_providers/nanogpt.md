@@ -75,7 +75,7 @@ This method provides more granular control over which models appear in your mode
 When using NanoGPT in Chat Completions mode, you can find unique settings under the **Generation Settings** tab (sliders icon) in the **Sampling** panel.
 
 *   **Enable Websearch**: Allows the model to access the internet to answer questions. This is only available when using the built-in **NanoGPT** endpoint and may incur an extra cost.
-*   **Send inline images**: Allows you to attach and send images to vision-capable models. When this is enabled, models with vision capabilities will appear green in the model dropdown list.
+*   **Send inline images**: Allows you to attach and send images to vision-capable models. When this is enabled a green check mark will appear when models with vision capabilities are selected.
 *   **Request model reasoning**: Instructs NanoGPT to send the model's "thinking" process to SillyTavern. This is useful for debugging but is not needed if you use the `v1legacy` or `v1thinking` custom endpoints.
 
 If you experience strange formatting, navigate to the **API Connections** tab and try adjusting the **Post Prompt Processing** settings. Toggling **Single user mode** or **Merge consecutive roles** can often resolve issues.
@@ -93,7 +93,7 @@ Text Completions mode can be more effective for SillyTavern's "Continue" functio
 5.  Paste your API key into the **Custom API Key (Optional)** field.
 6.  Click **Connect**.
 
-> **Note:** There is no UI option to request model reasoning in Text Completions mode.
+> **Note:** There is no current work around to show thinking. While there is a request reasoning button hidden under sampler select it does not seem to work. Addiontally `v1legacy` and `v1thinking` are not currently supported by the completions endpoint.
 
 #### Supported Models and Samplers
 
