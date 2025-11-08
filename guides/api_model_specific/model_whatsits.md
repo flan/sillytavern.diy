@@ -131,7 +131,15 @@ As for other flags like `K` and `IQ`, which refer to refer to how blocks of weig
 
 When an LLM is constructed, it is partitioned into "layers". If you can run the entire model in VRAM (or system RAM), this shouldn't be much of a consideration. But if you need to split models across multiple GPUs or between a GPU and system RAM, it becomes a very important concept.
 
-As each output-token is evaluated, the context being processed must be available for both analysis and production, and this is done one layer at a time. This means that, for *each token produced*, the working context, which is typically around 1 GiB per 2k tokens (due to another process, known as "vectorisation", that ascribes semantic and contextual significance to the token itself as it is evaluated, well beyond `311` representing "cat"), must be relocated to the same memory-pool as the next stage of execution. This can introduce a very severe bandwidth limitation that might not have been considered before: the PCIe bus. This need to move context around is why there is such a sharp drop-off in token-generation speed when more than one layer is located in either pool and why it may be faster to only use system memory than to split layers with a GPU.
+As each output-token is evaluated, the context being processed must be available for both analysis and production, and this is done one layer at a time. This means that, for *each token produced*, the working context, which varies in size from model to model, must be relocated to the same memory-pool as the next stage of execution. This can introduce a very severe bandwidth limitation that might not have been considered before: the PCIe bus. This need to move context around is why there is such a sharp drop-off in token-generation speed when more than one layer is located in either pool and why it may be faster to only use system memory than to split layers with a GPU.
+
+### Vectorisation and memory use
+
+Vectorisation is a critical part of how LLMs work, essential to the processes that give them semantic awareness and emergent properties.
+
+Simplified, it expands a token, like the representation of "cat", from `311` into hundreds or thousands of different numbers, referred to as "dimensions", that each encode some aspect of what they token seems to represent in relation to the text as a whole, and it is this collection of vectors that gets tuned by the biasing process as a model is evaluated, eventually collapsing back into a token like "dog" for output.
+
+As of 2025, tools such as https://huggingface.co/spaces/NyxKrage/LLM-Model-VRAM-Calculator may be used to estimate how much memory a model will use in practice relative to its context-size. (If the model you want to use is restricted in some way, selecting a related finetune or another model from the same base family is usually fine.)
 
 ## Mixture of Experts (MoE)
 
