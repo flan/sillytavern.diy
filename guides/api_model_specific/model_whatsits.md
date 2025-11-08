@@ -87,27 +87,52 @@ Have you ever heard an old MP3 file and wondered why cymbals sound like distorte
 
 Quantisation is similar to that: it is a form of lossy compression, where some precision is lost, but you can still recognise and mostly appreciate the thing you're observing. You're not going to mistake the number `6` for a `5` or `7`, but it's no longer `6.251614789`, and that makes you as sad as it makes me.
 
-For simplicity, we're going to ignore floating-point numbers since the basic concept is the same, though the math itself differs. (If you care about the distinction, you already know enough to skip this part)
+### What's the sweet-spot?
 
-At full sixteen-bit resolution, which is how most models are published, each parameter occupies two bytes of data, encoding up to 65,536 possible values, which allows for a lot of precision in choosing which node to reach next as the activation-chain passes through the parameter-tree. Arguably, way more than is typically ever needed.
+The answer to this always depends on what hardware you have, but in general, the following rule-of thumb works well:
 
-At eight-bit quantisation, typically written as `q8`, the amount of data is cut in half, to one byte, which reduces the number of possible values to 256. This is a *much* smaller number, but given the complexity of a model, with billions of parameters, and each one not having nearly enough transition possibilities to justify 16-bit precision in most circumstances, this is still more than enough to encode for virtually everything, which is why most people consider `q8` to be "full quality".
+quant | what this means
+--- | ---
+`q8` | virtually identical to the original in practice; use this if your hardware can fit the model and necessary context and you don't care too much about speed
+`q7` | doesn't exist, statistically no point
+`q6` | if you're obsessed with not sacrificing quality, but have slight space-constraints or would like just a little more speed, this is practically as good as `q8` for any model over the 6-8B range and only a very slight degradation below that
+`q5` | if you're okay with some very minor compromises for better speed, on any model above around 20B, this will be about as good as `q6`
+`q4` | this should usually be the lowest to accept outside of experimentation, generally good enough, but hallucinations and lost trains of thought become more common below this point
+`q3`-`q1` | there are only two reasons to consider these: either they're necessary to do something like run a 70B model instead of a 24B (more parameters means more opportunity for a model to regain focus if it starts to drift) or you're a researcher; all other things about models being equal (which is rarely the case), `q1` 70B will be capable of producing more insightful output than a `q8` 24B, though you may need to scrutinise or regenerate it a bit more often
 
-`q7` is often skipped because it doesn't provide any meaningful trade-off benefit.
+`q4_k_m` through `q5_k_m` are often considered good enough for actual production use for text-based tasks on models above 20B. For coding applications, a tiny loss in precision can be significant, but for storytelling and summarisation, the differences will be like using a synonym or a different idiom.
 
-`q6` is often considered the ideal compression-point: with the ability to encode 64 options, the most likely transitions are strongly retained and some less-likely possibilities are kept, as well. Statistical outliers start to get discarded at this point, but for creative storytelling, there is effectively no perceivable loss.
+Rephrased: `q6` if you can manage it, `q4` if you can't, and `q1` only if it lets you just barely run a much bigger model than you could normally. The incidences of repetition and slop increase significantly as quantisation becomes more severe: those detailed cymbals will turn into grating noise, souring the harmony of the now-enormous orchestra playing a much more complex composition.
 
-`q5` is a good middle-ground option. Not much to say: slower than `q4`, only a little less precise than `q6` in most cases.
+### What does iMatrix mean?
 
-`q4` is generally the quality/speed sweet-spot, with the ability to encode `16` discrete values. Compared to the sixty-five thousand that were shed since 16-bit, that seems downright tiny, but most of the time, only the most statistically important paths are traversed anyway, so there is still enough diversity in evaluation to get interesting, reasonably-reliable results; for creative writing, the loss in precision doesn't hurt too much.
+iMatrix ("importance matrix", often just written as `i` or `i1`) formats are generally preferred if available (they sometimes are not, due to the increased preparation costs), reflected in their typically higher numbers of downloads. They are a little bigger and run just a tiny bit slower, but make up for it by providing more statistical information around key decision-points in the model, allowing a smaller quantisation to perform better than it otherwise typically would.
 
-Below `q4`, though, things start to get murky: `q3` still allows for a bit of a range in possibilities, but by `q1`, it's effectively a weighted coin-flip. For very big models, `q1` might still be more intelligent than a much tinier `q8` just because of the statistical significance of having so many more possible transitions, but the incidence of repetition and slop will increase significantly as quantisation becomes more severe: those detailed cymbals will turn into grating noise, souring the harmony of the now-enormous orchestra playing a much more complex composition.
+### What does the `K` mean?
+
+`K` and its often-omitted siblings `0` (default) and `1` (uncommon) refer to how blocks of data are encoded.
+
+In short, `K` is usually best if, like with [iMatrix](#what-does-imatrix-mean), you can fit it within your hardware constraints. `0` is the default and is fine if `K` is not available. `1` is a simpler form of what `K` does and is better than `0`. You can usually just pick the biggest model that works for your setup and not worry about it.
+
+#### What do these *really* mean?
+
+Naively, it might seem like taking a 16-bit value, which, ignoring the decimal nature of FP16, can encode 65,535 discrete numbers and reducing it to 4-bit value, which can only encode 16, means that there is no way a `q4` quantisation can come anywhere close to the accuracy of the original model, but that ignores both that there are a finite number of transitions between any given nodes in an LLM and that these numbers form part of [complex matrices](https://en.wikipedia.org/wiki/Tensor). Because groups of numbers are used together to perform calculations, the losses in precision from any one data-point are largely reduced. The actual math involved is a bit beyond a simple quick-start guide, but if you recall high school linear algebra, many related concepts apply.
+
+Where the `K` comes in is that it denotes that groups of numbers used for these calculations are quantised together, with shared relative origin, scaling, and range parameters, allowing that small number of values to more precisely represent a narrow (or wide) spectrum of data, like when a line-graph is shown zoomed-in, making small differences look massive, even when they're only 0.05% apart from each other in absolute terms.
+
+`1` is a simpler approach, encoding groups of numbers with less granular metadata; it's still good, but it trades accuracy for faster processing speed, but LLMs are typically bandwidth-constrained, rather than compute-limited, making this a bit unimportant.
+
+`0` has still less metadata: even faster but no notable accuracy benefit.
+
+### What about the other letters?
+
+`XS`, `S`, `M`, `L`, `XL`, and others refer to the degree of compression within the given quantisation target. Since compression is lossy, choosing the largest one that works for your hardware is the right solution; dropping down a quantisation level to go with `L` instead of `S` is not a good idea, unless the publisher specifically says there is a quirk that justifies it.
 
 ### Anxious optimisation note
 
 You might be aware of things like your GPU's ability to work with matrices in `int4`, `int8`, `fp4`, `fp8`, and `fp16` modes. For LLM inferencing, this isn't super-important, since memory-bandwidth is the most significant bottleneck by far, but `q8` will map to `int8` and smaller sizes are packed with an interleaving strategy for speed, typically being expanded to the next-highest size before evaluation, so don't worry about trying to make the numbers align.
 
-## GGUF, GGML, and SafeTensors
+## GPTQ, GGUF, GGML, and SafeTensors
 
 These are encoding formats for models. If you are not self-hosting, that's all you really need to know.
 
@@ -115,17 +140,21 @@ SafeTensors can be thought of as uncompressed data, like a `.wav` file that you 
 
 GGUF, the GPT-Generated Unified Format, is the successor to GPT-Generated Markup Language, both more-compact, specialised ways of repacking SafeTensor data. GGUF is notable and extremely popular because it provides standardisation for the practice of quantisation.
 
+GPTQ is the successor to GGUF, though both are likely to co-exist for a while. It introduces more-efficient packing strategies and better separation of parameter-types, making it possible to have more variable weight quantisations alongside variable-precision activations, so that further compression may be achieved without notable additional loss.
+
+The GPTQ format refers to model files that have been compressed using the GPTQ (Generative Pre-trained Transformer Quantization) algorithm, a post-training quantization (PTQ) method. This format is primarily used to reduce the size of large language models (LLMs) and accelerate inference, making them runnable on consumer-grade GPUs with limited VRAM. 
+Key Characteristics
+Weight-Only Quantization: The core of the GPTQ format is quantizing the model's weights (typically in the linear layers) to very low bit-widths, such as 4-bit (INT4), 3-bit, or even 2-bit. Activations are usually kept in a higher precision, like FP16, during inference.
+
+### EXL and MLX
+
+These are alternate model encoding strategies for specific hardware implementations: EXL for nVidia and MXL for Apple Silicon.
+
+If available for the model you want to use, they are likely to offer better performance than the more-generic GPTQ and GGUF formats, but they are typically only published for high-profile research and assistant uses.
+
 ### Computer science history note
 
 The name "SafeTensors" comes from the roots of a lot of AI research being done with the [Python programming language](https://www.python.org/), which had a long-deprecated method of serialising data alongside code in a process referred to as "pickling", like preserving pickles or eggs, which gave rise to the extension "PickleTensors", with "Tensors" being a mathematical concept commonly used in machine-learning. While easy to use and convenient, pickled data can do malicious things when unpickled, so a successor that ensured the data would be inert upon unpickling was created and deemed "safe".
-
-## iMatrix
-
-This is both very complex and very simple. There's enough complexity in this document already.
-
-Some models may be advertised as being "iMatrix" (or "i1") and these typically have far more downloads. This is because they are generally better: their quanitsation process involves additional analysis to determine the most important weights and gives them more presence in the compressed model. This is much slower to produce and a little slower to evaluate (though nothing compared to the memory-bandwidth problem), so as long as the slightly larger size isn't a problem for your VRAM, just go for iMatrix.
-
-As for other flags like `K` and `IQ`, which refer to refer to how blocks of weights are grouped or split, this can generally be ignored in favour of picking the largest usable model from a given quantised set. `S`, `M`, and `L` mean the same thing they do for shirt-sizes: small, medium, large, and are really just there for min/maxing when every byte and clock-cycle matters.
 
 ## Layers, context, and memory-footprint
 
