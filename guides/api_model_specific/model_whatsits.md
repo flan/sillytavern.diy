@@ -61,7 +61,7 @@ Merges are a related concept, typically taking two or more models that have been
 
 This is a concept related to finetuning that comes up more often in business-like contexts: RAGs are effectively a searchable database of material that an LLM can subjectively load into its working context to give it information that is very domain-specific without needing to be told to look up a certain document or topic. The trade-off is that any information loaded from a RAG consumes tokens in context.
 
-A finetune bakes this information into the model itself so it has no additional evaluation cost, but it has the downside of the material becoming inextribably part of the model's data.
+A finetune bakes this information into the model itself so it has no additional evaluation cost, but it has the downside of the material becoming inextricably part of the model's data.
 
 ## Parameters
 
@@ -111,7 +111,7 @@ You might be aware of things like your GPU's ability to work with matrices in `i
 
 These are encoding formats for models. If you are not self-hosting, that's all you really need to know.
 
-SafeTensors can be thought of as uncompressed data, like a `.wav` file that you might get from ripping a CD: full precision, no imposed compression, and very big. These typically come in sixteen-bit floating-point precision, which means that, roughly speaking, each parameter takes two butes of data to encode. Most GPUs from the past decade do well with this format, but it consumes a ton of memory. Very few people actually run them outside of specialised hosting providers.
+SafeTensors can be thought of as uncompressed data, like a `.wav` file that you might get from ripping a CD: full precision, no imposed compression, and very big. These typically come in sixteen-bit floating-point precision, which means that, roughly speaking, each parameter takes two bytes of data to encode. Most GPUs from the past decade do well with this format, but it consumes a ton of memory. Very few people actually run them outside of specialised hosting providers.
 
 GGUF, the GPT-Generated Unified Format, is the successor to GPT-Generated Markup Language, both more-compact, specialised ways of repacking SafeTensor data. GGUF is notable and extremely popular because it provides standardisation for the practice of quantisation.
 
@@ -123,15 +123,15 @@ The name "SafeTensors" comes from the roots of a lot of AI research being done w
 
 This is both very complex and very simple. There's enough complexity in this document already.
 
-Some models may be advertised as being "iMatrix" (or "i1") and these typically have far more downloads. This is because they are generally better: their quanitsation process involves additional analysis to determine the most important weights and gives them more presence in the compressed model. This is much slower to produce and a little slower to evaluate (though nothing compared to the memory-bandwdith problem), so as long as the slightly larger size isn't a problem for your VRAM, just go for iMatrix.
+Some models may be advertised as being "iMatrix" (or "i1") and these typically have far more downloads. This is because they are generally better: their quanitsation process involves additional analysis to determine the most important weights and gives them more presence in the compressed model. This is much slower to produce and a little slower to evaluate (though nothing compared to the memory-bandwidth problem), so as long as the slightly larger size isn't a problem for your VRAM, just go for iMatrix.
 
-As for other flags like `K` and `IQ`, which refer to refer to how blocks of weights are grouped or split, this can generally be ignored in facour of picking the largest usable model from a given quantised set. `S`, `M`, and `L` mean the same thing they do for shirt-sizes: small, medium, large, and are really just there for min/maxing when every byte and clock-cycle matters.
+As for other flags like `K` and `IQ`, which refer to refer to how blocks of weights are grouped or split, this can generally be ignored in favour of picking the largest usable model from a given quantised set. `S`, `M`, and `L` mean the same thing they do for shirt-sizes: small, medium, large, and are really just there for min/maxing when every byte and clock-cycle matters.
 
 ## Layers, context, and memory-footprint
 
 When an LLM is constructed, it is partitioned into "layers". If you can run the entire model in VRAM (or system RAM), this shouldn't be much of a consideration. But if you need to split models across multiple GPUs or between a GPU and system RAM, it becomes a very important concept.
 
-As each output-token is evaluated, the context being processed must be available for both analysis and production, and this is done one layer at a time. This means that, for *each token produced*, the working context, which is typically around 1 GiB per 2k tokens (due to another process, known as "vectorisation", that ascribes semantic and contextual significance to the token itself as it is evaulated, well beyond `311` representing "cat"), must be relocated to the same memory-pool as the next stage of execution. This can introduce a very severe bandwidth limitation that might not have been considered before: the PCIe bus. This need to move context around is why there is such a sharp drop-off in token-generation speed when more than one layer is located in either pool and why it may be faster to only use system memory than to split layers with a GPU.
+As each output-token is evaluated, the context being processed must be available for both analysis and production, and this is done one layer at a time. This means that, for *each token produced*, the working context, which is typically around 1 GiB per 2k tokens (due to another process, known as "vectorisation", that ascribes semantic and contextual significance to the token itself as it is evaluated, well beyond `311` representing "cat"), must be relocated to the same memory-pool as the next stage of execution. This can introduce a very severe bandwidth limitation that might not have been considered before: the PCIe bus. This need to move context around is why there is such a sharp drop-off in token-generation speed when more than one layer is located in either pool and why it may be faster to only use system memory than to split layers with a GPU.
 
 ## Mixture of Experts (MoE)
 

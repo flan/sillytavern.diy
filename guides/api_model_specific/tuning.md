@@ -31,13 +31,13 @@ A *very* common beginner mistake is to set your context as high as possible. Whe
 
 As of late 2025, it is strongly recommended that you start with a context-size of 16k (`16384`) and scale it up (or sometimes down) in steps of 2k (`2048`) up to a maximum of 32k (`32768`). Smaller models usually maintain better focus with smaller contexts, while larger models can sometimes find something useful in a large window, but your overall experience will be better with numbers like these.
 
-While there is a case for large contexts, such as searching a knowledgebase or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creative story does not.
+While there is a case for large contexts, such as searching a knowledge-base or looking for patterns in code, those typically have a lot of structure for an LLM agent to work with; a creative story does not.
 
 Let mechanisms like SillyTavern's built-in "Summarize" extension, or some other popular World Info extensions, help to keep your story on track, and help them out with custom lorebooks or Author's Note entries.
 
 ## Max Response Length
 
-Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value around `300` for more chat-like interactions, `500` for longer-format narrative stories, and `1000` or more for assistant uses. There is no real penalty for setting it too high, except that a rambling LLM might continute for way too long before being interrupted.
+Max Response Length does _not_ strictly tell the LLM how many tokens to produce (hinting in your prompts with mechanisms like `produce {{random::2,3,3,3,4}} paragraphs of text` is the best way to do that as of 2025). Rather, it constrains how many tokens SillyTavern will accept and display. Combined with mechanisms like SillyTavern's ability to detect and remove unfinished sentences, this can help trim messages at a more sensible length for certain chat-styles (instant-messaging simulation, for example), but it is often a good idea to set it to a value around `300` for more chat-like interactions, `500` for longer-format narrative stories, and `1000` or more for assistant uses. There is no real penalty for setting it too high, except that a rambling LLM might continue for way too long before being interrupted.
 
 ## Prompt Size `[implicit]`
 
@@ -96,7 +96,7 @@ Presence Penalty functions much the same as Frequency Penalty, except it looks a
 
 Top P works in tandem with Temperature, reducing the set of candidate tokens that can follow the last-generated bit of text. For each token an LLM produces, it enumerates a list of candidates that can follow, assigning them a probability score; Temperature adds some randomness to these probabilities, and Top P sorts them from most-probable to least-probable, then throws away some of the least-likely options, making output more predictable.
 
-While the default vlaue of `1.0` (which does _not_ mean "consider everything") is reasonable for most models, if your chat sometimes ends up changing languages or going in a very strange direction, it could be because the LLM considered that "猫" is a possible option for "cat" in your story, even though it was scored quite low, but a roll of the dice made it the next token, and then something else outside of English was much more likely to follow. In case this is happening to you, try lowering it in steps of `0.025`
+While the default value of `1.0` (which does _not_ mean "consider everything") is reasonable for most models, if your chat sometimes ends up changing languages or going in a very strange direction, it could be because the LLM considered that "猫" is a possible option for "cat" in your story, even though it was scored quite low, but a roll of the dice made it the next token, and then something else outside of English was much more likely to follow. In case this is happening to you, try lowering it in steps of `0.025`
 
 ## Min P
 
@@ -104,7 +104,7 @@ Min P acts as a filter on which tokens can enter consideration for Top P and Typ
 
 ## Typical P `[Text Completion]`
 
-Typical P works with Top P to help filter the list of candiate successor-tokens prior to scoring. The default value of `1.0` does not cause anything to be prematurely discarded, while lower values reduce variance relative to an "average" point, discarding the highest-probability and lowest-probability options, which may increase the stability of production in exchange for making it more bland, but also less predictable for common phrases in the target language.
+Typical P works with Top P to help filter the list of candidate successor-tokens prior to scoring. The default value of `1.0` does not cause anything to be prematurely discarded, while lower values reduce variance relative to an "average" point, discarding the highest-probability and lowest-probability options, which may increase the stability of production in exchange for making it more bland, but also less predictable for common phrases in the target language.
 
 It should probably not be changed from `1.0` for storytelling purposes; slightly lower values may make sense for exploring ideas in an assistant capacity.
 
