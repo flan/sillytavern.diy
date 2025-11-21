@@ -13,7 +13,7 @@ Theming extensions focus on the aesthetics of the SillyTavern UI. They may be hi
   - Provides an in-interface means for customising bits of CSS to adjust look and feel
   - Discord: https://discord.com/channels/1100685673633153084/1192820281434198047
 
-- [Video Avatars](https://github.com/Vibecoder9000/SillyTavern-VideoAvatar)
+- [Video Avatars](https://github.com/Vibecoder9000/Extension-VideoAvatar)
   - Bring your characters to life with animated avatars.
     - Converts uploaded `.mp4` files to animated WebP thumbnails for character cards and displays animated avatars.
     - Does not currently support persona avatars.
