@@ -17,5 +17,6 @@ Theming extensions focus on the aesthetics of the SillyTavern UI. They may be hi
   - Bring your characters to life with animated avatars.
     - Converts uploaded `.mp4` files to animated WebP thumbnails for character cards and displays animated avatars.
     - Does not currently support persona avatars.
+  - Reddit Discussion: https://www.reddit.com/r/SillyTavernAI/comments/1o7y314/release_video_avatars_extension/
   - GitHub Issues: https://github.com/Vibecoder9000/Extension-VideoAvatar/issues
   - Discord: https://discord.gg/sillytavern
