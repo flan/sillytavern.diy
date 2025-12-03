@@ -18,6 +18,10 @@ These will likely break often as stories progress and might cause significant fr
   - Adds flags to messages to keep track of which characters were present for a given scene, so that future LLM productions are less omniscient
     - Requires some user assistance to mark who is around at any given time and does not completely solve the problem of globally shared knowledge
   - Discord: https://discord.com/channels/1100685673633153084/1297615132289011854
+- [Qdrant Memory](https://github.com/HO-git/st-qdrant-memory)
+  - Creates a per-character vector-storage database so details can be retained between chats.
+    - Requires a vector embedding setup.
+  - Discord: https://discord.com/channels/1100685673633153084/1433888159737057323
 - [Typing Indicator](https://github.com/SillyTavern/Extension-TypingIndicator)
   - Adds a `X is typing...` notification while message-generation is in progress, whether streaming or not, for that high-anxiety chat feeling
   - This extension is directly supported by SillyTavern and can be trusted to be compatible with the latest version
