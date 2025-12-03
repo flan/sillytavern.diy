@@ -20,7 +20,7 @@ These will likely break often as stories progress and might cause significant fr
   - Discord: https://discord.com/channels/1100685673633153084/1297615132289011854
 - [Qdrant Memory](https://github.com/HO-git/st-qdrant-memory)
   - Creates a per-character vector-storage database so details can be retained between chats.
-    - Requires a vector embedding setup.
+    - Requires a vector embedding setup and a Qdrant database.
   - Discord: https://discord.com/channels/1100685673633153084/1433888159737057323
 - [Typing Indicator](https://github.com/SillyTavern/Extension-TypingIndicator)
   - Adds a `X is typing...` notification while message-generation is in progress, whether streaming or not, for that high-anxiety chat feeling
